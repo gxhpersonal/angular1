@@ -5,6 +5,60 @@
 	<title>Document</title>
 </head>
 <body>
-	<script src="https://github.com/gxhpersonal/angular1/blob/master/%E5%BE%AE%E4%BF%A1%E5%88%86%E4%BA%AB/jweixin-1.0.0.js"></script>
+	<script src="gxhpersonal.github.io/angular1/blob/master/WetchatShare/jweixin-1.0.0.js"></script>
+
+	<script>
+        //微信分享
+     $scope.WeixinShare = function () {
+         // 分享
+         var appid = 'wx335a3d7d1a651fec';
+         var imgUrl = $scope.ProblemDetail.shareImgurl;
+         var lineLink = $scope.ProblemDetail.shareLinkUrl + "";
+         if (lineLink == "") {
+             lineLink = window.location.href;
+         } else {
+             lineLink = $scope.ProblemDetail.shareLinkUrl;
+         }
+         var shareTitle = $scope.ProblemDetail.shareTitle;
+         var descContent = $scope.ProblemDetail.shareDesc;
+         wx.error(function (res) {
+         });
+         wx.ready(function () {
+             wx.onMenuShareAppMessage({
+                 desc: descContent,
+                 title: shareTitle,
+                 link: lineLink,
+                 imgUrl: imgUrl,
+                 trigger: function (res) {
+                 },
+                 success: function (res) {
+
+                 },
+                 cancel: function (res) {
+                 },
+                 fail: function (res) {
+                 }
+             });
+
+
+             wx.onMenuShareTimeline({
+                 desc: descContent,
+                 title: shareTitle,
+                 link: lineLink,
+                 imgUrl: imgUrl,
+                 trigger: function (res) {
+                 },
+                 success: function (res) {
+
+                 },
+                 cancel: function (res) {
+                 },
+                 fail: function (res) {
+                 }
+             });
+
+         });
+     }
+	</script>
 </body>
 </html>
