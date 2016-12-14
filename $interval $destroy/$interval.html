@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+	<meta charset="UTF-8">
+	<title>$interval</title>
+</head>
+<body ng-controller="appcontroller">
+	<h1>倒计时：{{time.d}}天&nbsp;{{time.h}}小时&nbsp;{{time.m}}分&nbsp;{{time.s}}秒</h1>
+
+	<script src="angular.js"></script>
+	<script>
+		var app = angular.module('myapp',[])
+		app.controller('appcontroller',function($interval,$scope,$timeout){
+			var time = $scope.time = {};
+    time.endTime = new Date('Tue Dec 13 2017 17:47:54 GMT+0800 (中国标准时间)');
+
+    var count = function () {
+    	time.nowTime = new Date();
+        //计算剩下毫秒数
+        time.t = time.endTime.getTime() - time.nowTime.getTime();
+        time.d = Math.floor(time.t / 1000 / 60 / 60 / 24);
+        time.h = Math.floor(time.t / 1000 / 60 / 60 % 24);
+        time.m = Math.floor(time.t / 1000 / 60 % 60) < 10 ? '0' + Math.floor(time.t / 1000 / 60 % 60) : Math.floor(time.t / 1000 / 60 % 60);
+        time.s = Math.floor(time.t / 1000 % 60) < 10 ? '0' + Math.floor(time.t / 1000 % 60) : Math.floor(time.t / 1000 % 60);
+        //$scope.Residualtime = time.h + ":" + time.m + ":" + time.s;
+        $scope.h1 = Math.floor(time.h / 10);
+        $scope.h2 = time.h % 10;
+        $scope.m1 = Math.floor(time.m / 10);
+        $scope.m2 = time.m % 10;
+        $scope.s1 = Math.floor(time.s / 10);
+        $scope.s2 = time.s % 10;
+        //alert(time.t);
+        if (time.t <= 0) {
+        	$scope.hide_time_left = true;
+        	$scope.show_closure = true;
+        	$("#activityend").show();
+        	$("#activitystart").hide();
+        	if (time.h < 0) {
+        		time.h = '0';
+        		time.m = '00';
+        		time.s = '00';
+        	}
+            //window.location.reload();
+
+        }
+    };
+
+    count();
+    var stop = $interval(count, 1000);
+    $scope.$on('$destroy', function () {
+    	$interval.cancel(stop);
+    });
+})
+</script>
+</body>
+</html>
