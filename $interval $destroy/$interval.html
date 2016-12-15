@@ -48,8 +48,8 @@
     count();
     var stop = $interval(count, 1000);
     $scope.$on('$destroy', function () {
-    	$interval.cancel(stop);
-    });
+    	$interval.cancel(stop)
+    })
 })
 </script>
 </body>
