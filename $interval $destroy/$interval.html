@@ -47,7 +47,7 @@
 
     count();
     var stop = $interval(count, 1000);
-    $scope.$on('$destroy', function () {
+    $scope.$on('$destroy', function () {  //angular中的倒计时必须停止，否则会影响到其他进程服务
     	$interval.cancel(stop)
     })
 })
