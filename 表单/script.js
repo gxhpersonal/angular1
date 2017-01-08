@@ -7,7 +7,7 @@ angular.module('docsTimeDirective',[])
     	alert('clicked');
     	$scope.aaa = true;
     }
-    //$routescope
+    //$rootscope
     $scope.lastname = "121212";
     $scope.names = [
        {'name':'jack','country':'china','sex':'man'},
